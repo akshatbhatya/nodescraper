@@ -2,6 +2,13 @@ import app from "./src/server/server.js";
 import sendQueryInput from "./src/router/router.js";
 import runScraper from "./src/scraper/scraper.js";
 
+import dotenv from 'dotenv';
+dotenv.config({
+    path:"./.env"
+});
+
+const PORT = process.env.PORT || 3000;
+
 app.get('/api', (req, res) => {
   res.json({ message: 'API is working!' });
 });
@@ -42,6 +49,6 @@ app.post("/api/scrape", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {  
-console.log("Server is running on http://localhost:3000");
+app.listen(PORT, () => {  
+console.log(`Server is running on http://localhost:${PORT}`);
 });
