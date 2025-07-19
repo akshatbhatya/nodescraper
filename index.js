@@ -23,7 +23,6 @@ app.get('/api', (req, res) => {
 // })
 
 
-
 app.post("/api/scrape", async (req, res) => {
     try {
         const data = req.body;

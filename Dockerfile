@@ -45,3 +45,4 @@ EXPOSE 3000
 
 # Start app with npm run dev
 CMD ["npm", "run", "dev"]
+# Set the default command to run your app
