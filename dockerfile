@@ -1,7 +1,7 @@
 # Use an official Node.js base image with Chrome support
 FROM node:20
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
 # Install Puppeteer dependencies for headless Chrome
@@ -27,17 +27,21 @@ RUN apt-get update && apt-get install -y \
     libvulkan1 \
     libxss1 \
     --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy package files and install dependencies
 COPY package*.json ./
+
+# Disable Puppeteer's Chromium download (optional if you're using system Chrome)
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 RUN npm install
 
-# Copy all source files
+# Copy source files
 COPY . .
 
-# Expose the port (change if your app uses a different one)
+# Expose port used by your app
 EXPOSE 3000
 
-# Run the app
-CMD ["npm", "dev"]
+# Start app with npm run dev
+CMD ["npm", "run", "dev"]
